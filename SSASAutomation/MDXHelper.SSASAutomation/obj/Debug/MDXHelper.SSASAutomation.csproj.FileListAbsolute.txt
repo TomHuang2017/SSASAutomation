@@ -1,0 +1,5 @@
+E:\2.自己文档\BigData\SSASAutomation\SSASAutomation\MDXHelper.SSASAutomation\bin\Debug\MDXHelper.SSASAutomation.dll
+E:\2.自己文档\BigData\SSASAutomation\SSASAutomation\MDXHelper.SSASAutomation\bin\Debug\MDXHelper.SSASAutomation.pdb
+E:\2.自己文档\BigData\SSASAutomation\SSASAutomation\MDXHelper.SSASAutomation\obj\Debug\MDXHelper.SSASAutomation.dll
+E:\2.自己文档\BigData\SSASAutomation\SSASAutomation\MDXHelper.SSASAutomation\obj\Debug\MDXHelper.SSASAutomation.pdb
+E:\2.自己文档\BigData\SSASAutomation\SSASAutomation\MDXHelper.SSASAutomation\obj\Debug\MDXHelper.SSASAutomation.csprojResolveAssemblyReference.cache

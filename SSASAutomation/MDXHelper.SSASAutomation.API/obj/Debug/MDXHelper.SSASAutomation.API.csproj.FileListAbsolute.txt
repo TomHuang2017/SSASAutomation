@@ -1,0 +1,4 @@
+E:\2.自己文档\BigData\SSASAutomation\SSASAutomation\MDXHelper.SSASAutomation.API\bin\Debug\MDXHelper.SSASAutomation.API.dll
+E:\2.自己文档\BigData\SSASAutomation\SSASAutomation\MDXHelper.SSASAutomation.API\bin\Debug\MDXHelper.SSASAutomation.API.pdb
+E:\2.自己文档\BigData\SSASAutomation\SSASAutomation\MDXHelper.SSASAutomation.API\obj\Debug\MDXHelper.SSASAutomation.API.dll
+E:\2.自己文档\BigData\SSASAutomation\SSASAutomation\MDXHelper.SSASAutomation.API\obj\Debug\MDXHelper.SSASAutomation.API.pdb

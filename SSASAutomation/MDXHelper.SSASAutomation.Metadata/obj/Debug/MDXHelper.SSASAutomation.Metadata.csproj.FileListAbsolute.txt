@@ -1,0 +1,4 @@
+E:\2.自己文档\BigData\SSASAutomation\SSASAutomation\MDXHelper.SSASAutomation.Metadata\bin\Debug\MDXHelper.SSASAutomation.Metadata.dll
+E:\2.自己文档\BigData\SSASAutomation\SSASAutomation\MDXHelper.SSASAutomation.Metadata\bin\Debug\MDXHelper.SSASAutomation.Metadata.pdb
+E:\2.自己文档\BigData\SSASAutomation\SSASAutomation\MDXHelper.SSASAutomation.Metadata\obj\Debug\MDXHelper.SSASAutomation.Metadata.dll
+E:\2.自己文档\BigData\SSASAutomation\SSASAutomation\MDXHelper.SSASAutomation.Metadata\obj\Debug\MDXHelper.SSASAutomation.Metadata.pdb

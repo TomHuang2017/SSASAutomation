@@ -1,0 +1,11 @@
+E:\2.自己文档\BigData\SSASAutomation\SSASAutomation\SSASAutomation\bin\Debug\SSASAutomation.exe.config
+E:\2.自己文档\BigData\SSASAutomation\SSASAutomation\SSASAutomation\bin\Debug\SSASAutomation.exe
+E:\2.自己文档\BigData\SSASAutomation\SSASAutomation\SSASAutomation\bin\Debug\SSASAutomation.pdb
+E:\2.自己文档\BigData\SSASAutomation\SSASAutomation\SSASAutomation\bin\Debug\MDXHelper.SSASAutomation.dll
+E:\2.自己文档\BigData\SSASAutomation\SSASAutomation\SSASAutomation\bin\Debug\MDXHelper.SSASAutomation.pdb
+E:\2.自己文档\BigData\SSASAutomation\SSASAutomation\SSASAutomation\obj\Debug\SSASAutomation.csprojResolveAssemblyReference.cache
+E:\2.自己文档\BigData\SSASAutomation\SSASAutomation\SSASAutomation\obj\Debug\SSASAutomation.Form1.resources
+E:\2.自己文档\BigData\SSASAutomation\SSASAutomation\SSASAutomation\obj\Debug\SSASAutomation.Properties.Resources.resources
+E:\2.自己文档\BigData\SSASAutomation\SSASAutomation\SSASAutomation\obj\Debug\SSASAutomation.csproj.GenerateResource.Cache
+E:\2.自己文档\BigData\SSASAutomation\SSASAutomation\SSASAutomation\obj\Debug\SSASAutomation.exe
+E:\2.自己文档\BigData\SSASAutomation\SSASAutomation\SSASAutomation\obj\Debug\SSASAutomation.pdb

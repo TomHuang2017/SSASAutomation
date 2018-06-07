@@ -1,0 +1,32 @@
+if object_id('as_automation_log_details','U') is not null drop table as_automation_log_details
+go
+create table as_automation_log_details
+(
+id int identity(1,1) primary key,
+message_type nvarchar(100),
+message_result nvarchar(100),
+message_description nvarchar(max),
+create_at datetime
+)
+if object_id('sp_as_automation_log_details','P') is not null drop proc sp_as_automation_log_details
+go
+create proc sp_as_automation_log_details(
+@message_type nvarchar(100),
+@message_result nvarchar(100),
+@message_description nvarchar(max)
+)
+as
+begin
+insert into as_automation_log_details
+(
+message_type,
+message_result,
+message_description,
+create_at 
+)
+values(@message_type,@message_result,@message_description,getdate())
+
+end
+
+select * from as_automation_log_details
+order by 1 desc
