@@ -82,25 +82,25 @@ ORDER  BY hierarchy_name,
         public DataTable GET_SSAS_CORE_MEASURES_SET(DB_SQLHELPER_BASE sqlHelper,String measure_group_id = null)
         {
             String QueryString = String.Format(@"
-            SELECT DISTINCT
-                   mg.measureGroupID,
-                   mg.measureGroupName,
-                   measure.MeasureId,
-                   measure.MeasureName,
-                   map.MeasureDataType,
-                   map.DBColumn,
-                   mg.DSVSchemaName,
-                   map.AggregationFunction,
-                   measure.DisplayFolder,
-                   measure.FormatString
-            FROM   CLB_MetaData_Measures AS measure
-                   JOIN CLB_MetaData_Measures_Mapping AS map
-                     ON map.MeasureID = measure.MeasureID
-                   JOIN CLB_MetaData_MeasureGroup AS mg
-                     ON mg.MeasureGroupID = map.MeasureGroupID
-                   JOIN CLB_MetaData_Measures_Description AS descrip
-                     ON descrip.MeasureID = measure.MeasureID
-            WHERE mg.measureGroupID='{0}'", measure_group_id);
+SELECT DISTINCT mg.measure_group_id                                                             AS measure_group_id,
+                mg.measure_group_name                                                           AS measure_group_name,
+                mea.measure_id                                                                  AS measure_id,
+                mea.measure_name                                                                AS measure_name,
+                mapp.measure_data_type                                                          AS measure_data_type,
+                Isnull(mapp.db_column_customized, mapp.db_column_default)                       AS db_column,
+                mg.dsv_schema_name                                                              AS dsv_schema_name,
+                Isnull(mapp.aggregation_function_customized, mapp.aggregation_function_default) AS aggregation_function,
+                mea.display_folder                                                              AS display_folder,
+                mea.format_string                                                               AS format_string
+FROM   ssas_measures AS mea WITH(nolock)
+       INNER JOIN ssas_measures_mapping AS mapp WITH(nolock)
+               ON mea.measure_id = mapp.measure_id
+       INNER JOIN ssas_measure_group AS mg WITH(nolock)
+               ON mg.measure_group_id = mapp.measure_group_id
+       INNER JOIN ssas_measures_description AS descr WITH(nolock)
+               ON descr.measure_id = mea.measure_id
+WHERE  mea.is_enabled = 1
+       AND mg.measure_group_id='{0}'", measure_group_id);
             return sqlHelper.EXECUTE_SQL_QUERY_RETURN_TABLE(sqlHelper,QueryString);
         }
         public DataTable GET_SSAS_MEASURE_GROUPS_SET(DB_SQLHELPER_BASE sqlHelper, int isRolap)

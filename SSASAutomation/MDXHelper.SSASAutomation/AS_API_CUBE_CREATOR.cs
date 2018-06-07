@@ -632,15 +632,15 @@ namespace MDXHelper.SSASAutomation
                 DataTable coreMeasureSet = asMeta.GET_SSAS_CORE_MEASURES_SET(sqlHelper);
                 foreach (DataRow row in coreMeasureSet.Rows)
                 {
-                    String measureGroupID = row["measureGroupID"].ToString();
-                    String MeasureId = row["MeasureId"].ToString();
-                    String MeasureName = row["MeasureName"].ToString();
-                    String DSVSchemaName = row["DSVSchemaName"].ToString();
-                    String DisplayFolder = row["DisplayFolder"].ToString();
-                    String FormatString = row["FormatString"].ToString();
-                    String MeasureDataType = row["MeasureDataType"].ToString();
-                    String DBColumn = row["DBColumn"].ToString();
-                    String AggregationFunction = row["AggregationFunction"].ToString();
+                    String measureGroupID = row["measure_group_id"].ToString();
+                    String MeasureId = row["measure_id"].ToString();
+                    String MeasureName = row["measure_name"].ToString();
+                    String DSVSchemaName = row["dsv_schema_name"].ToString();
+                    String DisplayFolder = row["display_folder"].ToString();
+                    String FormatString = row["format_string"].ToString();
+                    String MeasureDataType = row["measure_data_type"].ToString();
+                    String DBColumn = row["db_column"].ToString();
+                    String AggregationFunction = row["aggregation_function"].ToString();
                     MeasureGroup measureGroup = cube.MeasureGroups.Find(measureGroupID);
                     AS_API.ADD_MEASURE_TO_MEASURE_GROUP(
                         sqlHelper
