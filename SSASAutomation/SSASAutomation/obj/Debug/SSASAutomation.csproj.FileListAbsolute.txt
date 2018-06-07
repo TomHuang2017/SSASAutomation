@@ -9,3 +9,6 @@ E:\2.自己文档\BigData\SSASAutomation\SSASAutomation\SSASAutomation\obj\Debug
 E:\2.自己文档\BigData\SSASAutomation\SSASAutomation\SSASAutomation\obj\Debug\SSASAutomation.csproj.GenerateResource.Cache
 E:\2.自己文档\BigData\SSASAutomation\SSASAutomation\SSASAutomation\obj\Debug\SSASAutomation.exe
 E:\2.自己文档\BigData\SSASAutomation\SSASAutomation\SSASAutomation\obj\Debug\SSASAutomation.pdb
+E:\git_project\SSASAutomation\SSASAutomation\SSASAutomation\bin\Debug\SSASAutomation.exe.config
+E:\git_project\SSASAutomation\SSASAutomation\SSASAutomation\obj\Debug\SSASAutomation.exe
+E:\git_project\SSASAutomation\SSASAutomation\SSASAutomation\obj\Debug\SSASAutomation.pdb
