@@ -73,7 +73,7 @@ SELECT DISTINCT dimension_id,
                 source_attribute_id,
                 hierarchies_id
 FROM   ssas_attributes_hierarchies AS hie WITH(nolock)
-WHERE  is_enabled = 1
+WHERE  is_enabled = 0
        AND dimension_id <> '{0}'
 ORDER  BY hierarchy_name,
           level_id ", dimension_id);
@@ -105,77 +105,82 @@ WHERE  mea.is_enabled = 1
         }
         public DataTable GET_SSAS_MEASURE_GROUPS_SET(DB_SQLHELPER_BASE sqlHelper, int isRolap)
         {
-            String isRolapFilter = (isRolap == 0) ? " AND IsRealTime<>1" : "";
+            String isRolapFilter = (isRolap == 0) ? " AND mg.is_real_time<>1" : "";
             String QueryString = String.Format(@"
-SELECT DISTINCT
-		order_query.order_index,
-        mg.measureGroupID,
-		mg.DSVSchemaName,
-        mg.measureGroupName,
-        isnull(mg.KeyNotFound_Action,'0') AS KeyNotFound_Action,
-        mg.IsRealTime,
-		dsv.DependedFactTable,
-        isnull(mg.Is_Rolap_Mg,isnull(mg.IsRealTime,0)) AS Is_Rolap_Mg
-FROM    CLB_MetaData_Measures AS measure
-        JOIN CLB_MetaData_Measures_Mapping AS map
-            ON map.MeasureID = measure.MeasureID
-        JOIN CLB_MetaData_MeasureGroup AS mg
-            ON map.MeasureGroupID = mg.MeasureGroupID
-        JOIN CLB_MetaData_Measures_Description AS descrip
-            ON descrip.MeasureID = measure.MeasureID
-		LEFT JOIN [dbo].[CLB_MetaData_ETL_Module] as fact_module
-			ON fact_module.ModuleName=replace(mg.DSVSchemaName,'OLAP_','') AND fact_module.Enabled=1
-		JOIN [dbo].[CLB_MetaData_DSV] as dsv
-		    ON dsv.DSVSchemaName=mg.DSVSchemaName
-		LEFT JOIN (
-			select min(order_index) as order_index,v1.MeasureGroupID
-			from 
-			(
-			select distinct 1 as order_index,v2.MeasureGroupID from [dbo].[CLB_MetaData_DimUsage] v1
-			inner join [dbo].[CLB_MetaData_DimUsage] v2 on v1.InternalMeasureGroupID=v2.MeasureGroupID
-			union all
-			select max(case when [DimUsageType]='regular' then 2
-						when [DimUsageType]='reference' then 3
-						when [DimUsageType]='manytomany' then 4
-						else 4 end) as order_index, MeasureGroupID from [dbo].[CLB_MetaData_DimUsage]
-						group by MeasureGroupID) v1
-			group by v1.MeasureGroupID
-		) order_query
-		on order_query.MeasureGroupID= mg.MeasureGroupID
-WHERE 1=1  {0}
-order by order_query.order_index,IsRealTime desc,measureGroupName desc", isRolapFilter);
+SELECT DISTINCT order_query.order_index                            AS order_index,
+                mg.measure_group_id                                AS measure_group_id,
+                mg.dsv_schema_name                                 AS dsv_schema_name,
+                mg.measure_group_name                              AS measure_group_name,
+                Isnull(mg.key_not_found_action, '0')               AS key_not_found_action,
+                mg.is_real_time                                    AS is_real_time,
+                dsv.depended_fact_table                            AS depended_fact_table,
+                Isnull(mg.is_rolap_mg, Isnull(mg.is_real_time, 0)) AS is_rolap_mg
+FROM   ssas_measures AS mea WITH(nolock)
+       INNER JOIN ssas_measures_mapping AS mapp WITH(nolock)
+               ON mea.measure_id = mapp.measure_id
+       INNER JOIN ssas_measure_group AS mg WITH(nolock)
+               ON mg.measure_group_id = mapp.measure_group_id
+       INNER JOIN ssas_measures_description AS descr WITH(nolock)
+               ON descr.measure_id = mea.measure_id
+       LEFT JOIN ssas_etl_module AS module WITH(nolock)
+              ON module.module_name = Replace(mg.dsv_schema_name, 'olap_', '')
+                 AND module.is_enabled = 1
+       INNER JOIN ssas_dsv AS dsv WITH(nolock)
+               ON mg.dsv_schema_name = dsv.dsv_schema_name
+       LEFT JOIN (SELECT Min(order_index) AS order_index,
+                         v1.measure_group_id
+                  FROM   (SELECT DISTINCT 1 AS order_index,
+                                          v2.measure_group_id
+                          FROM   ssas_dim_usage v1
+                                 INNER JOIN ssas_dim_usage v2
+                                         ON v1.internal_measure_group_id = v2.measure_group_id
+                          UNION ALL
+                          SELECT Max(CASE
+                                       WHEN Lower(dim_usage_type) = 'regular' THEN 2
+                                       WHEN Lower(dim_usage_type) = 'reference' THEN 3
+                                       WHEN Lower(dim_usage_type) = 'manytomany' THEN 4
+                                       ELSE 4
+                                     END) AS order_index,
+                                 measure_group_id
+                          FROM   [dbo].ssas_dim_usage
+                          GROUP  BY measure_group_id) v1
+                  GROUP  BY v1.measure_group_id)order_query
+              ON order_query.measure_group_id = mg.measure_group_id
+WHERE  1 = 1 {0}
+ORDER  BY order_query.order_index,
+          mg.is_real_time DESC,
+          mg.measure_group_name DESC ", isRolapFilter);
             return sqlHelper.EXECUTE_SQL_QUERY_RETURN_TABLE(sqlHelper,QueryString);
 
         }
         public DataTable GET_SSAS_PARTITION_SET(DB_SQLHELPER_BASE sqlHelper,String measure_group_id = null)
         {
             String QueryString = String.Format(@"
-            select top 1  
-		            mg.DSVSchemaName,
-		            usage.factFKDimColumnName,
-		            mg.MeasureGroupID
-            from [dbo].[CLB_MetaData_DimUsage]  AS usage
-            INNER JOIN dbo.CLB_MetaData_MeasureGroup AS mg
-	            ON mg.MeasureGroupID = usage.MeasureGroupID
-            where dimensionid ='OLAP_DIM_Date' and mg.MeasureGroupID='{0}'", measure_group_id);
+SELECT DISTINCT mg.dsv_schema_name                                                              AS dsv_schema_name,
+                Isnull(usage.fact_fk_dim_column_name_customized, usage.fact_fk_dim_column_name) AS fact_fk_dim_column_name,
+                mg.measure_group_id                                                             AS measure_group_id
+FROM   ssas_dim_usage AS usage WITH(nolock)
+       INNER JOIN ssas_measure_group AS mg WITH(nolock)
+               ON usage.measure_group_id = mg.measure_group_id
+WHERE  Lower(usage.dimension_id) = 'olap_dim_date'
+       AND mg.measure_group_id ='{0}'", measure_group_id);
             return sqlHelper.EXECUTE_SQL_QUERY_RETURN_TABLE(sqlHelper,QueryString); ;
         }
         public DataTable GET_SSAS_AGGREGATION_DESIGN_SET(DB_SQLHELPER_BASE sqlHelper,String measure_group_id = null)
         {
             String QueryString = String.Format(@"
-            select 
-	            mg.MeasureGroupID,
-	            mg.AggregationDesignName,
-	            agg.AggregationName,
-	            agg.DimensionID,
-	            agg.AttributeID,
-	            design.Description
-            from [dbo].[CLB_MetaData_MeasureGroup] as mg
-            inner join CLB_MetaData_AggregationDesign as design
-            on mg.AggregationDesignName=design.AggregationDesignName
-            inner join CLB_MetaData_AggregationDesign_Attribute as agg
-            on agg.AggregationName=design.AggregationName
-            where mg.MeasureGroupID='{0}'", measure_group_id);
+SELECT DISTINCT mg.measure_group_id,
+                mg.aggregation_design_name,
+                agg_d_att.aggregation_name,
+                agg_d_att.dimension_id,
+                agg_d_att.attribute_id,
+                agg_d.description
+FROM   ssas_measure_group AS mg WITH(nolock)
+       INNER JOIN ssas_aggregation_design AS agg_d WITH(nolock)
+               ON mg.aggregation_design_name = agg_d.aggregation_design_name
+       INNER JOIN ssas_aggregation_design_attribute AS agg_d_att WITH(nolock)
+               ON agg_d.aggregation_name = agg_d_att.aggregation_name
+WHERE  mg.measure_group_id='{0}'", measure_group_id);
             return sqlHelper.EXECUTE_SQL_QUERY_RETURN_TABLE(sqlHelper,QueryString);
         }
         public DataTable GET_SSAS_DIM_USAGE_SET(DB_SQLHELPER_BASE sqlHelper,String measure_group_id = null)

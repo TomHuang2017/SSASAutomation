@@ -305,7 +305,7 @@ namespace MDXHelper.SSASAutomation
                         , MESSAGE_RESULT_TYPE.Normal);
                     dim.Update();
                     sqlHelper.ADD_MESSAGE_LOG(
-                        "[Create dimension] Succeed to add changes ofo dimension objects.."
+                        "[Create dimension] Succeed to add changes to dimension objects.."
                         , MESSAGE_TYPE.DIMENSION
                         , MESSAGE_RESULT_TYPE.Normal);
                 }
@@ -337,9 +337,9 @@ namespace MDXHelper.SSASAutomation
                 DataTable DimensionSet = asMeta.GET_SSAS_DIMENSION_SET(sqlHelper);
                 foreach (DataRow row in DimensionSet.Rows)
                 {
-                    String DimensionID = row["DimensionID"].ToString();
-                    String DimensionName = row["DimensionName"].ToString();
-                    String DimensionType = row["DimensionType"].ToString();
+                    String DimensionID = row["dimension_id"].ToString();
+                    String DimensionName = row["dimension_name"].ToString();
+                    String DimensionType = row["dimension_type"].ToString();
                     AS_API.ADD_CUBE_DIMENSION(
                         sqlHelper,
                         cubeDB,
@@ -384,26 +384,26 @@ namespace MDXHelper.SSASAutomation
                 String DSVSchemaName = "";
                 foreach (DataRow row in MGSet.Rows)
                 {
-                    String measureGroupID = row["measureGroupID"].ToString();
-                    String measureGroupName = row["measureGroupName"].ToString();
-                    String DependedFactTable = row["DependedFactTable"].ToString();
-                    String KeyNotFound_Action = row["KeyNotFound_Action"].ToString();
-                    int is_rolap_mg = Convert.ToInt16(row["Is_Rolap_Mg"].ToString());
+                    String measureGroupID = row["measure_group_id"].ToString();
+                    String measureGroupName = row["measure_group_name"].ToString();
+                    String DependedFactTable = row["depended_fact_table"].ToString();
+                    String KeyNotFound_Action = row["key_not_found_action"].ToString();
+                    int is_rolap_mg = Convert.ToInt16(row["is_rolap_mg"].ToString());
                     MeasureGroup newMG = AS_API.ADD_MEASURE_GROUP(sqlHelper, cube, measureGroupName, measureGroupID, is_rolap_mg, KeyNotFound_Action);
                     DataTable dimUsageSet = asMeta.GET_SSAS_DIM_USAGE_SET(sqlHelper, measureGroupID);
                     DataTable CoreMeasureSet = asMeta.GET_SSAS_CORE_MEASURES_SET(sqlHelper, measureGroupID);
                     foreach (DataRow measure in CoreMeasureSet.Rows)
                     {
-                        measureGroupID = measure["measureGroupID"].ToString();
-                        measureGroupName = measure["measureGroupName"].ToString();
-                        String MeasureId = measure["MeasureId"].ToString();
-                        String MeasureName = measure["MeasureName"].ToString();
-                        String MeasureDataType = measure["MeasureDataType"].ToString();
-                        String DBColumn = measure["DBColumn"].ToString();
-                        DSVSchemaName = measure["DSVSchemaName"].ToString();
-                        String AggregationFunction = measure["AggregationFunction"].ToString();
-                        String DisplayFolder = measure["DisplayFolder"].ToString();
-                        String FormatString = measure["FormatString"].ToString();
+                        measureGroupID = measure["measure_group_id"].ToString();
+                        measureGroupName = measure["measure_group_name"].ToString();
+                        String MeasureId = measure["measure_id"].ToString();
+                        String MeasureName = measure["measure_name"].ToString();
+                        String MeasureDataType = measure["measure_data_type"].ToString();
+                        String DBColumn = measure["db_column"].ToString();
+                        DSVSchemaName = measure["dsv_schema_name"].ToString();
+                        String AggregationFunction = measure["aggregation_function"].ToString();
+                        String DisplayFolder = measure["display_folder"].ToString();
+                        String FormatString = measure["format_string"].ToString();
                         AS_API.ADD_MEASURE_TO_MEASURE_GROUP(
                             sqlHelper,
                             newMG,
@@ -508,7 +508,7 @@ namespace MDXHelper.SSASAutomation
             }
             if (partition_date_filter != null && partition_date_filter.Rows != null && partition_date_filter.Rows.Count > 0)
             {
-                String factFKDimColumnName = partition_date_filter.Rows[0]["factFKDimColumnName"].ToString();
+                String factFKDimColumnName = partition_date_filter.Rows[0]["fact_fk_dim_column_name"].ToString();
                 int month_volumn_per_partition = Convert.ToInt32(CONFIGURATION_HELPER.GET_METADATA_PROPERTY("month_volumn_per_partition"));
                 int year_volumn_per_cube = Convert.ToInt32(CONFIGURATION_HELPER.GET_METADATA_PROPERTY("year_volumn_per_cube"));
 
@@ -584,12 +584,12 @@ namespace MDXHelper.SSASAutomation
                 agg_design_list = asMeta.GET_SSAS_AGGREGATION_DESIGN_SET(sqlHelper, mg.ID);
                 foreach (DataRow measure in agg_design_list.Rows)
                 {
-                    String AggregationDesignName = measure["AggregationDesignName"].ToString();
+                    String AggregationDesignName = measure["aggregation_design_name"].ToString();
                     //agg_design=AggregationDesignName;
 
-                    String AggregationName = measure["AggregationName"].ToString();
-                    String DimensionID = measure["DimensionID"].ToString();
-                    String AttributeID = measure["AttributeID"].ToString();
+                    String AggregationName = measure["aggregation_name"].ToString();
+                    String DimensionID = measure["dimension_id"].ToString();
+                    String AttributeID = measure["attribute_id"].ToString();
                     if (mg.AggregationDesigns.Find(AggregationDesignName) == null)
                     {
                         mg.AggregationDesigns.Add(AggregationDesignName);

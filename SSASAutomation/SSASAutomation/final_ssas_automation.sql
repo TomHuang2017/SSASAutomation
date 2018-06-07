@@ -290,10 +290,12 @@ create table dbo.ssas_attributes
 	is_default bit,
 	created_at datetime NOT NULL,
 	updated_at datetime NOT NULL,
-	primary key(attribute_id)
+	primary key(attribute_id,dimension_id)
 	--foreign key (dimension_id) references ssas_dimension(dimension_id)
 )
 GO
+ 
+
 insert into ssas_attributes
 select
 	AttributeID as attribute_id,
@@ -473,13 +475,13 @@ Create Table ssas_aggregation_design
 	is_default bit,
 	created_at datetime NOT NULL,
 	updated_at datetime NOT NULL,
-	primary key (aggregation_name)
+	primary key (aggregation_design_name)
 )
 GO
 insert into ssas_aggregation_design
 select
-	AggregationDesignName as aggregation_name,
-	AggregationName as aggregation_design_name,
+	AggregationName as aggregation_name,
+	AggregationDesignName as aggregation_design_name,
 	Description as [description],
 	1 as is_default,
 	1 as is_enabled,
@@ -572,7 +574,7 @@ create proc sp_ssas_automation_deploy_log_details(
 )
 as
 begin
-	insert into ssas_automation_log_details
+	insert into ssas_automation_deploy_log_details
 	(
 		message_type,
 		message_result,
