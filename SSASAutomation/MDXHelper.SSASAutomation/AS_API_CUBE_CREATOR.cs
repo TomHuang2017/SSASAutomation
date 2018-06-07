@@ -420,15 +420,15 @@ namespace MDXHelper.SSASAutomation
                     }
                     foreach (DataRow dimUsage in dimUsageSet.Rows)
                     {
-                        String DimUsageType = dimUsage["DimUsageType"].ToString();
-                        String InternalDimID = dimUsage["InternalDimID"].ToString();
-                        String InternalDimAttrID = dimUsage["InternalDimAttrID"].ToString();
-                        DSVSchemaName = dimUsage["DSVSchemaName"].ToString();
-                        String factFKDimColumnName = dimUsage["factFKDimColumnName"].ToString();
-                        String DataType = dimUsage["DataType"].ToString();
-                        String DimensionID = dimUsage["DimensionID"].ToString();
-                        String AttributeID = dimUsage["AttributeID"].ToString();
-                        String InternalMeasureGroupID = dimUsage["InternalMeasureGroupID"].ToString();
+                        String DimUsageType = dimUsage["dim_usage_type"].ToString();
+                        String InternalDimID = dimUsage["internal_dim_id"].ToString();
+                        String InternalDimAttrID = dimUsage["internal_dim_attrid"].ToString();
+                        DSVSchemaName = dimUsage["dsv_schema_name"].ToString();
+                        String factFKDimColumnName = dimUsage["fact_fk_dim_column_name"].ToString();
+                        String DataType = dimUsage["fact_fk_dim_column_data_type"].ToString();
+                        String DimensionID = dimUsage["dimension_id"].ToString();
+                        String AttributeID = dimUsage["attribute_id"].ToString();
+                        String InternalMeasureGroupID = dimUsage["internal_measure_group_id"].ToString();
                         switch (DimUsageType.ToLower())
                         {
                             case "regular":

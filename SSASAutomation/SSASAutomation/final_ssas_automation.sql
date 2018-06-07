@@ -489,6 +489,16 @@ from [dbo].[CLB_MetaData_AggregationDesign]
 go
 select * from ssas_aggregation_design
 go
+
+if object_id('dbo.ssas_etl_module','V') IS NOT NULL 
+	drop view dbo.ssas_etl_module
+GO
+create view dbo.ssas_etl_module as
+select distinct
+	ModuleName as module_name,
+	Enabled as is_enabled 
+from CLB_MetaData_ETL_Module
+go
 if object_id('dbo.ssas_aggregation_design_attribute') IS NOT NULL 
 	drop table dbo.ssas_aggregation_design_attribute
 GO

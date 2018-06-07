@@ -181,26 +181,29 @@ order by order_query.order_index,IsRealTime desc,measureGroupName desc", isRolap
         public DataTable GET_SSAS_DIM_USAGE_SET(DB_SQLHELPER_BASE sqlHelper,String measure_group_id = null)
         {
             String QueryString = String.Format(@"
-            SELECT mg.MeasureGroupID,
-                   DimUsageType,
-                   mg.DSVSchemaName,
-                   factFKDimColumnName,
-                   DataType,
-                   DimensionID,
-                   AttributeID,
-                   InternalDimID,
-                   InternalDimAttrID,
-                   InternalMeasureGroupID
-            FROM   dbo.CLB_MetaData_DimUsage AS usage
-                   INNER JOIN dbo.CLB_MetaData_MeasureGroup AS mg
-                           ON mg.MeasureGroupID = usage.MeasureGroupID
-				   LEFT JOIN [dbo].[CLB_MetaData_ETL_Module] as fact_module--only get the enabled module
-						   ON fact_module.ModuleName=replace(mg.DSVSchemaName,'OLAP_','') AND fact_module.Enabled=1 
-            WHERE  mg.MeasureGroupID = '{0}' 
-            ORDER by CASE WHEN DimUsageType='Regular' THEN 1 
-			              WHEN DimUsageType='Reference' THEN 2 
-			              WHEN DimUsageType='ManyToMany' THEN 3 
-		             ELSE 4 END ", measure_group_id);
+SELECT mg.measure_group_id                                                                       AS measure_group_id,
+       usage.dim_usage_type                                                                      AS dim_usage_type,
+       mg.dsv_schema_name                                                                        AS dsv_schema_name,
+       Isnull(usage.fact_fk_dim_column_name_customized, usage.fact_fk_dim_column_name)           AS fact_fk_dim_column_name,
+       Isnull(usage.fact_fk_dim_column_data_type_customized, usage.fact_fk_dim_column_data_type) AS fact_fk_dim_column_data_type,
+       usage.dimension_id                                                                        AS dimension_id,
+       usage.attribute_id                                                                        AS attribute_id,
+       usage.internal_dim_id                                                                     AS internal_dim_id,
+       usage.internal_dim_attrid                                                                 AS internal_dim_attrid,
+       usage.internal_measure_group_id                                                           AS internal_measure_group_id
+FROM   ssas_dim_usage AS usage WITH(nolock)
+       INNER JOIN ssas_measure_group AS mg WITH(nolock)
+               ON usage.measure_group_id = mg.measure_group_id
+       INNER JOIN ssas_etl_module AS module WITH(nolock)
+               ON module.module_name = Replace(mg.dsv_schema_name, 'olap_', '')
+                  AND module.is_enabled = 1
+WHERE  mg.measure_group_id <> '{0}'
+ORDER  BY CASE
+            WHEN Lower(usage.dim_usage_type) = 'regular' THEN '1'
+            WHEN Lower(usage.dim_usage_type) = 'reference' THEN '2'
+            WHEN Lower(usage.dim_usage_type) = 'manytomany' THEN '3'
+            ELSE '4'
+          END ", measure_group_id);
             return sqlHelper.EXECUTE_SQL_QUERY_RETURN_TABLE(sqlHelper,QueryString);
         }
 

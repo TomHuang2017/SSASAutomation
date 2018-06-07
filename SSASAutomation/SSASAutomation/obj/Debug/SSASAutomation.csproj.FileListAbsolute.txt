@@ -12,3 +12,11 @@ E:\2.自己文档\BigData\SSASAutomation\SSASAutomation\SSASAutomation\obj\Debug
 E:\git_project\SSASAutomation\SSASAutomation\SSASAutomation\bin\Debug\SSASAutomation.exe.config
 E:\git_project\SSASAutomation\SSASAutomation\SSASAutomation\obj\Debug\SSASAutomation.exe
 E:\git_project\SSASAutomation\SSASAutomation\SSASAutomation\obj\Debug\SSASAutomation.pdb
+E:\git_project\SSASAutomation\SSASAutomation\SSASAutomation\bin\Debug\SSASAutomation.exe
+E:\git_project\SSASAutomation\SSASAutomation\SSASAutomation\bin\Debug\SSASAutomation.pdb
+E:\git_project\SSASAutomation\SSASAutomation\SSASAutomation\bin\Debug\MDXHelper.SSASAutomation.dll
+E:\git_project\SSASAutomation\SSASAutomation\SSASAutomation\bin\Debug\MDXHelper.SSASAutomation.pdb
+E:\git_project\SSASAutomation\SSASAutomation\SSASAutomation\obj\Debug\SSASAutomation.csprojResolveAssemblyReference.cache
+E:\git_project\SSASAutomation\SSASAutomation\SSASAutomation\obj\Debug\SSASAutomation.Form1.resources
+E:\git_project\SSASAutomation\SSASAutomation\SSASAutomation\obj\Debug\SSASAutomation.Properties.Resources.resources
+E:\git_project\SSASAutomation\SSASAutomation\SSASAutomation\obj\Debug\SSASAutomation.csproj.GenerateResource.Cache
