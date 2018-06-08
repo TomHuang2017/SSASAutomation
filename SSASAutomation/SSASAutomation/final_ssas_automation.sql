@@ -66,7 +66,7 @@ create table dbo.ssas_measure_group
 	is_rolap_mg bit,
 	is_real_time bit,--是否实时数据
 	is_default bit,--是否默认，新建的为0，默认的为1
-	is_enable bit,--可以禁用一些没必要的度量值组，提高cube process的性能，禁用可以是不创建（需要建立measure依赖，不创建依赖的measure才行）或者改下partition的where条件加1=2
+	is_enabled bit,--可以禁用一些没必要的度量值组，提高cube process的性能，禁用可以是不创建（需要建立measure依赖，不创建依赖的measure才行）或者改下partition的where条件加1=2
 	created_at datetime NOT NULL,
 	updated_at datetime NOT NULL,
 	primary key(measure_group_id)

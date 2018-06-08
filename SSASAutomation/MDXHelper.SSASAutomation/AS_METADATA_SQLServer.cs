@@ -73,8 +73,8 @@ SELECT DISTINCT dimension_id,
                 source_attribute_id,
                 hierarchies_id
 FROM   ssas_attributes_hierarchies AS hie WITH(nolock)
-WHERE  is_enabled = 0
-       AND dimension_id <> '{0}'
+WHERE  is_enabled = 1
+       AND dimension_id = '{0}'
 ORDER  BY hierarchy_name,
           level_id ", dimension_id);
             return sqlHelper.EXECUTE_SQL_QUERY_RETURN_TABLE(sqlHelper,QueryString);
@@ -114,7 +114,7 @@ SELECT DISTINCT order_query.order_index                            AS order_inde
                 Isnull(mg.key_not_found_action, '0')               AS key_not_found_action,
                 mg.is_real_time                                    AS is_real_time,
                 dsv.depended_fact_table                            AS depended_fact_table,
-                Isnull(mg.is_rolap_mg, Isnull(mg.is_real_time, 0)) AS is_rolap_mg
+                cast(Isnull(mg.is_rolap_mg, Isnull(mg.is_real_time, 0)) as int) AS is_rolap_mg
 FROM   ssas_measures AS mea WITH(nolock)
        INNER JOIN ssas_measures_mapping AS mapp WITH(nolock)
                ON mea.measure_id = mapp.measure_id
@@ -199,10 +199,10 @@ SELECT mg.measure_group_id                                                      
 FROM   ssas_dim_usage AS usage WITH(nolock)
        INNER JOIN ssas_measure_group AS mg WITH(nolock)
                ON usage.measure_group_id = mg.measure_group_id
-       INNER JOIN ssas_etl_module AS module WITH(nolock)
-               ON module.module_name = Replace(mg.dsv_schema_name, 'olap_', '')
-                  AND module.is_enabled = 1
-WHERE  mg.measure_group_id <> '{0}'
+--       INNER JOIN ssas_etl_module AS module WITH(nolock)
+--               ON module.module_name = Replace(mg.dsv_schema_name, 'olap_', '')
+--                  AND module.is_enabled = 1
+WHERE  mg.measure_group_id = '{0}'
 ORDER  BY CASE
             WHEN Lower(usage.dim_usage_type) = 'regular' THEN '1'
             WHEN Lower(usage.dim_usage_type) = 'reference' THEN '2'
