@@ -1,0 +1,330 @@
+﻿<Create xmlns="http://schemas.microsoft.com/analysisservices/2003/engine" AllowOverwrite="true">
+  <ObjectDefinition>
+    <Database xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400">
+      <ID>$(cubeDBName)</ID>
+      <Name>$(cubeDBName)</Name>
+      <ddl200:CompatibilityLevel>1100</ddl200:CompatibilityLevel>
+      <Language>2052</Language>
+      <Collation>Chinese_PRC_CI_AS</Collation>
+      <DataSourceImpersonationInfo>
+        <ImpersonationMode>Default</ImpersonationMode>
+      </DataSourceImpersonationInfo>
+      <Dimensions>
+        <Dimension>
+          <ID>OLAP_DIM_Bool</ID>
+          <Name>布尔标识</Name>
+          <Source xsi:type="DataSourceViewBinding">
+            <DataSourceViewID>SSAS_DSV</DataSourceViewID>
+          </Source>
+          <ErrorConfiguration>
+            <KeyNotFound>ReportAndStop</KeyNotFound>
+            <KeyDuplicate>ReportAndStop</KeyDuplicate>
+            <NullKeyNotAllowed>ReportAndStop</NullKeyNotAllowed>
+          </ErrorConfiguration>
+          <Language>2052</Language>
+          <Collation>Chinese_PRC_CI_AS</Collation>
+          <UnknownMemberName>Unknown</UnknownMemberName>
+          <Attributes>
+            <Attribute>
+              <ID>ID</ID>
+              <Name>布尔标识</Name>
+              <Usage>Key</Usage>
+              <KeyColumns>
+                <KeyColumn>
+                  <DataType>Integer</DataType>
+                  <Source xsi:type="ColumnBinding">
+                    <TableID>OLAP_DIM_Bool</TableID>
+                    <ColumnID>ID</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <NameColumn>
+                <DataType>WChar</DataType>
+                <Source xsi:type="ColumnBinding">
+                  <TableID>OLAP_DIM_Bool</TableID>
+                  <ColumnID>ID</ColumnID>
+                </Source>
+              </NameColumn>
+              <OrderBy>Key</OrderBy>
+            </Attribute>
+          </Attributes>
+          <ProactiveCaching>
+            <SilenceInterval>-PT1S</SilenceInterval>
+            <Latency>-PT1S</Latency>
+            <SilenceOverrideInterval>-PT1S</SilenceOverrideInterval>
+            <ForceRebuildInterval>-PT1S</ForceRebuildInterval>
+            <Source xsi:type="ProactiveCachingInheritedBinding" />
+          </ProactiveCaching>
+        </Dimension>
+        <Dimension>
+          <ID>OLAP_DIM_Date_TimeCalculation</ID>
+          <Name>时间计算维度</Name>
+          <Source xsi:type="DataSourceViewBinding">
+            <DataSourceViewID>SSAS_DSV</DataSourceViewID>
+          </Source>
+          <ErrorConfiguration>
+            <KeyNotFound>ReportAndStop</KeyNotFound>
+            <KeyDuplicate>ReportAndStop</KeyDuplicate>
+            <NullKeyNotAllowed>ReportAndStop</NullKeyNotAllowed>
+          </ErrorConfiguration>
+          <Language>2052</Language>
+          <Collation>Chinese_PRC_CI_AS</Collation>
+          <UnknownMemberName>Unknown</UnknownMemberName>
+          <Attributes>
+            <Attribute>
+              <ID>PeriodID</ID>
+              <Name>时间计算维度</Name>
+              <Usage>Key</Usage>
+              <EstimatedCount>1</EstimatedCount>
+              <KeyColumns>
+                <KeyColumn>
+                  <DataType>Integer</DataType>
+                  <Source xsi:type="ColumnBinding">
+                    <TableID>OLAP_DIM_Date_TimeCalculation</TableID>
+                    <ColumnID>PeriodID</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <OrderBy>Key</OrderBy>
+              <DefaultMember>[时间计算维度].[时间计算维度].&amp;[1]</DefaultMember>
+              <IsAggregatable>false</IsAggregatable>
+            </Attribute>
+          </Attributes>
+          <ProactiveCaching>
+            <SilenceInterval>-PT1S</SilenceInterval>
+            <Latency>-PT1S</Latency>
+            <SilenceOverrideInterval>-PT1S</SilenceOverrideInterval>
+            <ForceRebuildInterval>-PT1S</ForceRebuildInterval>
+            <Source xsi:type="ProactiveCachingInheritedBinding" />
+          </ProactiveCaching>
+        </Dimension>
+      </Dimensions>
+      <Cubes>
+        <Cube>
+          <ID>$(cubeName)</ID>
+          <Name>$(cubeName)</Name>
+          <Language>2052</Language>
+          <Collation>Chinese_PRC_CI_AS</Collation>
+          <Dimensions>
+            <Dimension>
+              <ID>OLAP_DIM_Bool</ID>
+              <Name>布尔标识</Name>
+              <DimensionID>OLAP_DIM_Bool</DimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>ID</AttributeID>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+            <Dimension>
+              <ID>OLAP_DIM_Date_TimeCalculation</ID>
+              <Name>时间计算维度</Name>
+              <DimensionID>OLAP_DIM_Date_TimeCalculation</DimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>PeriodID</AttributeID>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+          </Dimensions>
+          <MeasureGroups>
+            <MeasureGroup>
+              <ID>FactBool</ID>
+              <Name>FactBool</Name>
+              <Measures>
+                <Measure>
+                  <ID>CountOfBool</ID>
+                  <Name>CountOfBool</Name>
+                  <AggregateFunction>Count</AggregateFunction>
+                  <DataType>Integer</DataType>
+                  <Source>
+                    <DataType>Integer</DataType>
+                    <DataSize>4</DataSize>
+                    <Source xsi:type="RowBinding">
+                      <TableID>OLAP_DIM_Bool</TableID>
+                    </Source>
+                  </Source>
+                </Measure>
+              </Measures>
+              <StorageMode>Molap</StorageMode>
+              <ProcessingMode>Regular</ProcessingMode>
+              <Dimensions>
+                <Dimension xsi:type="RegularMeasureGroupDimension">
+                  <CubeDimensionID>OLAP_DIM_Bool</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>ID</AttributeID>
+                      <KeyColumns>
+                        <KeyColumn>
+                          <DataType>Integer</DataType>
+                          <Source xsi:type="ColumnBinding">
+                            <TableID>OLAP_DIM_Bool</TableID>
+                            <ColumnID>ID</ColumnID>
+                          </Source>
+                        </KeyColumn>
+                      </KeyColumns>
+                      <Type>Granularity</Type>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+              <Partitions>
+                <Partition>
+                  <ID>Dim Bool</ID>
+                  <Name>Dim Bool</Name>
+                  <Source xsi:type="DsvTableBinding">
+                    <DataSourceViewID>SSAS_DSV</DataSourceViewID>
+                    <TableID>OLAP_DIM_Bool</TableID>
+                  </Source>
+                  <StorageMode>Molap</StorageMode>
+                  <ProcessingMode>Regular</ProcessingMode>
+                  <ProactiveCaching>
+                    <SilenceInterval>-PT1S</SilenceInterval>
+                    <Latency>-PT1S</Latency>
+                    <SilenceOverrideInterval>-PT1S</SilenceOverrideInterval>
+                    <ForceRebuildInterval>-PT1S</ForceRebuildInterval>
+                    <Source xsi:type="ProactiveCachingInheritedBinding" />
+                  </ProactiveCaching>
+                </Partition>
+              </Partitions>
+              <ProactiveCaching>
+                <SilenceInterval>-PT1S</SilenceInterval>
+                <Latency>-PT1S</Latency>
+                <SilenceOverrideInterval>-PT1S</SilenceOverrideInterval>
+                <ForceRebuildInterval>-PT1S</ForceRebuildInterval>
+                <Source xsi:type="ProactiveCachingInheritedBinding" />
+              </ProactiveCaching>
+            </MeasureGroup>
+          </MeasureGroups>
+          <Source>
+            <DataSourceViewID>SSAS_DSV</DataSourceViewID>
+          </Source>
+          <ProactiveCaching>
+            <SilenceInterval>-PT1S</SilenceInterval>
+            <Latency>-PT1S</Latency>
+            <SilenceOverrideInterval>-PT1S</SilenceOverrideInterval>
+            <ForceRebuildInterval>-PT1S</ForceRebuildInterval>
+            <Source xsi:type="ProactiveCachingInheritedBinding" />
+          </ProactiveCaching>
+        </Cube>
+      </Cubes>
+      <DataSources>
+        <DataSource xsi:type="RelationalDataSource">
+          <ID>DW_DataSource</ID>
+          <Name>DW_DataSource</Name>
+          <ConnectionString>$(dwConnectionString)</ConnectionString>
+          <ImpersonationInfo>
+            <ImpersonationMode>Default</ImpersonationMode>
+          </ImpersonationInfo>
+          <Timeout>PT0S</Timeout>
+        </DataSource>
+      </DataSources>
+      <DataSourceViews>
+        <DataSourceView>
+          <ID>SSAS_DSV</ID>
+          <Name>SSAS_DSV</Name>
+          <Annotations>
+            <Annotation>
+              <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+              <Value>true</Value>
+            </Annotation>
+            <Annotation>
+              <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:CurrentLayout</Name>
+              <Value>_ALL_TABLES_</Value>
+            </Annotation>
+            <Annotation>
+              <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:SchemaRestriction</Name>
+            </Annotation>
+            <Annotation>
+              <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:RetrieveRelationships</Name>
+              <Value>true</Value>
+            </Annotation>
+            <Annotation>
+              <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:Layouts</Name>
+              <Value>
+                <Layouts xmlns="">
+                  <Diagram>
+                    <Name>_ALL_TABLES_</Name>
+                    <DiagramLayout>
+                      <dds>
+                        <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="1" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="0" scrolltop="0" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="100" x="20505" y="14843" backcolor="15334399" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="0" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
+                          <font>
+                            <ddsxmlobjectstreamwrapper binary="010100009001905f010004cbcecce5" />
+                          </font>
+                          <mouseicon>
+                            <ddsxmlobjectstreamwrapper binary="6c74000000000000" />
+                          </mouseicon>
+                        </diagram>
+                        <layoutmanager>
+                          <ddsxmlobj />
+                        </layoutmanager>
+                      </dds>
+                    </DiagramLayout>
+                    <ShowRelationshipNames>False</ShowRelationshipNames>
+                    <UseDiagramDefaultLayout>True</UseDiagramDefaultLayout>
+                    <DiagramViewPortLeft>0</DiagramViewPortLeft>
+                    <DiagramViewPortTop>0</DiagramViewPortTop>
+                    <DiagramBoundingLeft>0</DiagramBoundingLeft>
+                    <DiagramBoundingTop>0</DiagramBoundingTop>
+                    <DiagramZoom>100</DiagramZoom>
+                  </Diagram>
+                </Layouts>
+              </Value>
+            </Annotation>
+          </Annotations>
+          <DataSourceID>DW_DataSource</DataSourceID>
+          <Schema>
+            <xs:schema id="SSAS_DSV" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+              <xs:element name="SSAS_DSV" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+                <xs:complexType>
+                  <xs:choice minOccurs="0" maxOccurs="unbounded">
+                    <xs:element name="OLAP_DIM_Bool" msprop:IsLogical="True" msprop:FriendlyName="OLAP_DIM_Bool" msprop:DbTableName="OLAP_DIM_Bool" msprop:TableType="View" msprop:Description="" msprop:QueryDefinition="SELECT   CAST(ID AS SMALLINT) AS ID&#xD;&#xA;FROM      (SELECT   0 AS ID&#xD;&#xA;                 UNION ALL&#xD;&#xA;                 SELECT   1 AS ID) AS boolSubQuery" msprop:QueryBuilder="SpecificQueryBuilder">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="ID" msdata:ReadOnly="true" msprop:DbColumnName="ID" msprop:FriendlyName="ID" type="xs:int" minOccurs="0" />
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:choice>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="OLAP_DIM_Date_TimeCalculation" msprop:DbTableName="OLAP_DIM_Date_TimeCalculation" msprop:FriendlyName="OLAP_DIM_Date_TimeCalculation" msprop:DbSchemaName="$(DBTableSchemaName)" msprop:TableType="View">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="PeriodID" type="xs:int" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:schema>
+            <SSAS_DSV xmlns="" />
+          </Schema>
+        </DataSourceView>
+      </DataSourceViews>
+		<Roles>
+			<Role>
+			<ID>Role</ID>
+			<Name>Role</Name>
+			<Members>
+				<Member>
+					<Name>Everyone</Name>
+					<Sid>$(sid)</Sid>
+				</Member>
+			</Members>
+			</Role>
+		</Roles>
+		<DatabasePermissions>
+			<DatabasePermission>
+			<ID>DatabasePermission</ID>
+			<Name>DatabasePermission</Name>
+			<RoleID>Role</RoleID>
+			<Process>true</Process>
+			<ReadDefinition>Allowed</ReadDefinition>
+			<Read>Allowed</Read>
+			<Administer>true</Administer>
+			</DatabasePermission>
+		</DatabasePermissions>
+    </Database>
+  </ObjectDefinition>
+</Create>
+
+

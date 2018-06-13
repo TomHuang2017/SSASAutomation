@@ -1,0 +1,17 @@
+E:\VS2013Project\SSASRestfulAPI\SSASRestfulAPI\bin\SSASRestfulAPI.dll.config
+E:\VS2013Project\SSASRestfulAPI\SSASRestfulAPI\bin\SSASRestfulAPI.dll
+E:\VS2013Project\SSASRestfulAPI\SSASRestfulAPI\bin\SSASRestfulAPI.pdb
+E:\VS2013Project\SSASRestfulAPI\SSASRestfulAPI\bin\MDXHelper.SSASAutomation.dll
+E:\VS2013Project\SSASRestfulAPI\SSASRestfulAPI\bin\Newtonsoft.Json.dll
+E:\VS2013Project\SSASRestfulAPI\SSASRestfulAPI\bin\System.Net.Http.Formatting.dll
+E:\VS2013Project\SSASRestfulAPI\SSASRestfulAPI\bin\System.Web.Http.dll
+E:\VS2013Project\SSASRestfulAPI\SSASRestfulAPI\bin\System.Web.Http.WebHost.dll
+E:\VS2013Project\SSASRestfulAPI\SSASRestfulAPI\bin\Newtonsoft.Json.xml
+E:\VS2013Project\SSASRestfulAPI\SSASRestfulAPI\bin\System.Net.Http.Formatting.xml
+E:\VS2013Project\SSASRestfulAPI\SSASRestfulAPI\bin\System.Web.Http.xml
+E:\VS2013Project\SSASRestfulAPI\SSASRestfulAPI\bin\System.Web.Http.WebHost.xml
+E:\VS2013Project\SSASRestfulAPI\SSASRestfulAPI\bin\zh-Hans\System.Net.Http.Formatting.resources.dll
+E:\VS2013Project\SSASRestfulAPI\SSASRestfulAPI\bin\zh-Hans\System.Web.Http.resources.dll
+E:\VS2013Project\SSASRestfulAPI\SSASRestfulAPI\bin\zh-Hans\System.Web.Http.WebHost.resources.dll
+E:\VS2013Project\SSASRestfulAPI\SSASRestfulAPI\obj\Release\SSASRestfulAPI.dll
+E:\VS2013Project\SSASRestfulAPI\SSASRestfulAPI\obj\Release\SSASRestfulAPI.pdb

@@ -1,0 +1,187 @@
+<?xml version='1.0' encoding='utf-8'?>
+<configurations>
+  <property name="clr.custom.file">
+    <type>string</type>
+    <value>shanghai_jing_wei</value>
+    <description>将调用哪个医院的自定义文件 shanghai_zhong_liu  shanghai_da_hua</description>
+  </property>
+  
+  <property name="clr.custom.name">
+    <type>string</type>
+    <value>上海精卫</value>
+    <description>当前医院的中文名称</description>
+  </property>
+
+  <property name="clr.olap.partition.min_date">
+    <type>date</type>
+    <value>2013-01-01</value>
+    <description>用户要求只要这个时间点开始的数据，那么ETL就只要导入从这个时间点开始的数据，最终包含的数据是根据clr.olap.partition.min_date+clr.olap.partition.count*clr.olap.partition.increase_month_volume(月)
+	</description>
+  </property>
+
+  <property name="clr.olap.partition.count">
+    <type>int</type>
+    <value>15</value>
+    <description>cube中创建的partiton分区数量，默认cube分区是按属性clr.olap.partition.increase_month_volume的月数的</description>
+  </property>
+
+  <property name="clr.olap.partition.increase_month_volume">
+    <type>int</type>
+    <value>6</value>
+    <description>cube中每个分区包含几个月的数据，默认一个分区包含一个月数据</description>
+  </property>
+  
+  <property name="clr.olap.server">
+    <type>string</type>
+    <value>.\SQL2012</value>
+    <description>Cube所在的服务器名</description>
+  </property>
+
+  <property name="clr.olap.cubedb">
+    <type>string</type>
+    <value>CLB_Hospital_Cube</value>
+    <description>Cube数据库的名字</description>
+  </property>
+
+  <property name="clr.olap.cubedb.rolap">
+    <type>string</type>
+    <value>CLB_Hospital_Cube_ROLAP</value>
+    <description>实时Cube数据库的名字</description>
+  </property>
+  
+  <property name="clr.olap.cube">
+    <type>string</type>
+    <value>CLB_Hospital_Cube</value>
+    <description>Cube的名字</description>
+  </property>
+
+  <property name="clr.db.cdr.link.server">
+    <type>string</type>
+    <value>10.40.22.97\cdrsvr</value>
+    <description>CDR Link Server 所在的服务器名和实例  172.28.220.31  202.202.202.49\pt</description>
+  </property>
+
+  <property name="clr.db.cdr.link.user">
+    <type>string</type>
+    <value>sa</value>
+    <description>CDR Link Server 用户名</description>
+  </property>
+
+  <property name="clr.db.cdr.link.pass">
+    <type>string</type>
+    <value>P@ssw0rd</value>
+    <description>CDR Link Server 密码 dhyy123 cdr123!@#</description>
+  </property>
+
+  <property name="clr.db.server">
+    <type>string</type>
+    <value>.\SQL2012</value>
+    <description>
+      DW的服务器名和实例名
+      CLBHOSPITALCUBE
+    </description>
+  </property>
+  
+  <property name="clr.db.dw">
+    <type>string</type>
+    <value>DemoDB</value>
+    <description>DW的名称</description>
+  </property>
+
+  <property name="clr.db.user">
+    <type>string</type>
+    <value></value>
+    <description>Sql Server身份验证时，登录DW的用户名，若该属性为空，表示windows 身份登录</description>
+  </property>
+
+  <property name="clr.db.pass">
+    <type>string</type>
+    <value></value>
+    <description>Sql Server身份验证时，登录DW的密码，表示windows 身份登录 dhyy123  cdr123!@#</description>
+  </property>
+
+  <property name="clr.db.file.path">
+    <type>string</type>
+    <value>D:\CLBR\DW</value>
+    <description>DW 数据库的物理存储路径 </description>
+  </property>
+
+  <property name="clr.db.log.path">
+    <type>string</type>
+    <value>D:\CLBR\DW</value>
+    <description>DW 数据库的物理存储路径 </description>
+  </property>
+  
+  <property name="clr.cube.backup.path">
+    <type>string</type>
+    <value>D:\BACKUP\CUBE</value>
+    <description>备份CUBE的物理存储路径 </description>
+  </property>
+
+  <property name="clr.db.backup.path">
+    <type>string</type>
+    <value>D:\BACKUP\DW</value>
+    <description>备份DW 数据库的物理存储路径 </description>
+  </property>
+
+  <property name="clr.db.backup.days">
+    <type>int</type>
+    <value>1</value>
+    <description>DB备份数据的保留天数</description>
+  </property>
+
+  <property name="clr.db.waitingtime.start_time_in_afernoon">
+    <type>int</type>
+    <value>1300</value>
+    <description>在计算平均就诊等待时间时=医生首次接诊时间 - 挂号时间。上午挂了下午的号，则为医生接诊时间 - 13:00,这个13：00为这个属性的默认值 </description>
+  </property>
+
+  <property name="clr.db.duty_doctor.min_number_patient">
+    <type>int</type>
+    <value>5</value>
+    <description>计算出班医生时=当天接诊病人超过5个人次的医生，算当天出班医生，这个5为当前属性的默认值 </description>
+  </property>
+
+  <property name="clr.db.version">
+    <type>int</type>
+    <value>2012</value>
+    <description>CDR服务器的版本</description>
+  </property>
+
+  <property name="clr.db.version">
+    <type>int</type>
+    <value>2012</value>
+    <description>CDR服务器的版本</description>
+  </property>
+  
+  <property name="db_table_schema_name">
+    <type>String</type>
+    <value>dbo</value>
+    <description>数据仓库的schema名称</description>
+  </property>
+
+  <property name="command_time_out">
+    <type>int</type>
+    <value>2000</value>
+    <description>查询数据仓库的超时时间</description>
+  </property>
+  
+  <property name="dw_connection_string">
+    <type>String</type>
+    <value>Data Source=.\SQL2012;Initial Catalog=DemoDB;Integrated Security=SSPI</value>
+    <description>数据仓库连接字符串</description>
+  </property>
+  
+  <property name="year_volumn_per_cube">
+    <type>int</type>
+    <value>5</value>
+    <description>每个Cube包含几年的数据</description>
+  </property>
+  
+  <property name="month_volumn_per_partition">
+    <type>int</type>
+    <value>6</value>
+    <description>每个分区包含几个月的数据</description>
+  </property>
+  
+</configurations>
