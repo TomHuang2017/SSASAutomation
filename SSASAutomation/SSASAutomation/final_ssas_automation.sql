@@ -534,6 +534,19 @@ from [dbo].[CLB_MetaData_AggregationDesign_Attribute]
 go
 select * from ssas_aggregation_design_attribute
 go
+--mdx 分组
+if object_id('dbo.ssas_mdx_group') IS NOT NULL 
+	drop table dbo.ssas_mdx_group
+GO
+Create Table ssas_mdx_group
+(
+	id int identity(1,1),
+	mdx_group_name nvarchar(200)，
+	mdx_group_order_index int,--各个组的排序顺序
+	mdx_group_order_index_customized int,--各个组的自定义排序顺序
+	is_default int--是否系统默认的mdx分组
+)
+go
 if object_id('dbo.ssas_mdx_expression') IS NOT NULL 
 	drop table dbo.ssas_mdx_expression
 GO
@@ -542,12 +555,19 @@ Create Table ssas_mdx_expression
 	id int identity(1,1) ,
 	measure_name nvarchar(200),--指标的名称
 	expression nvarchar(max),--表达式
+	expression_type_create0_assign_1_other2 int,--0:新建指标的mdx, 1:重写类型的mdx,2：其他语句
+	expression_type_config0_manul_1 int,--0:根据页面配置生成的mdx, 1：手动整个mdx贴进去的
+	mdx_group_name nvarchar(200)，--mdx 分组
 	expression_order_index int,--measure的定义顺序
-	expression_type int,--0:新建指标, 1:重写,2：其他语句
+	expression_order_index_customized int,--measure定制化的定义顺序
+	description nvarchar(512),--指标的需求口径描述
+	
+	/*------以下字段先留着-----*/
 	display_folder nvarchar(100),--显示文件夹
 	format_string nvarchar(100),--格式化字符串
 	is_visiable bit,--是否可显示
-	whole_mdx_expression nvarchar(max),--复杂mdx语句
+	/*------以下字段先留着-----*/
+	
 	is_enabled bit,
 	is_default bit,
 	created_at datetime NOT NULL,
@@ -583,5 +603,57 @@ begin
 	)
 	values(@message_type,@message_result,@message_description,getdate())
 
+end
+go
+if object_id('sp_ssas_cube_over_view','P') is not null drop proc sp_ssas_cube_over_view
+go
+create proc sp_ssas_cube_over_view(
+	@dimension_name nvarchar(100),
+	@measure_group_name_or_measure_name nvarchar(100),
+	@cube_type bit=0
+)
+as
+begin
+
+declare @filter_query nvarchar(max)=''
+set @filter_query=' mg.is_real_time='+ltrim(@cube_type)+' and dim.dimension_name LIKE ''%'+isnull(@dimension_name,'')+'%'''+
+                  ' and (mea.measure_name LIKE ''%'+isnull(@measure_group_name_or_measure_name,'')+'%'''+
+				  ' or mg.measure_group_name LIKE ''%'+isnull(@measure_group_name_or_measure_name,'')+'%'')'
+
+declare @cube_over_view_sql nvarchar(max)=''
+set @cube_over_view_sql='
+SELECT DISTINCT is_rolap_cube,
+                measure_group_id,
+                measure_group_name,
+                dim_usage_type,
+                dimension_name,
+                dimension_id
+FROM   (SELECT mg.is_real_time AS is_rolap_cube,
+               mg.measure_group_id,
+               mg.measure_group_name,
+               mea.measure_name,
+               usage.dim_usage_type,
+               dim.dimension_name,
+               dim.dimension_id
+        FROM   ssas_dim_usage AS usage WITH(nolock)
+               INNER JOIN ssas_measure_group AS mg WITH(nolock)
+                       ON usage.measure_group_id = mg.measure_group_id
+               LEFT JOIN ssas_measure_group AS mg_internal WITH(nolock)
+                      ON usage.internal_measure_group_id = mg_internal.measure_group_id
+               INNER JOIN ssas_dimension AS dim
+                       ON dim.dimension_id = usage.dimension_id
+               LEFT JOIN ssas_dimension AS dim_internal
+                      ON dim_internal.dimension_id = usage.internal_dim_id
+               INNER JOIN ssas_measures_mapping AS measure_map
+                       ON measure_map.measure_group_id = mg.measure_group_id
+               INNER JOIN ssas_measures AS mea
+                       ON mea.measure_id = measure_map.measure_id
+               INNER JOIN ssas_etl_module AS module WITH(nolock)
+                       ON module.module_name = Replace(mg.dsv_schema_name, ''olap_'', '''')
+                          AND module.is_enabled = 1
+        WHERE  '+@filter_query+') AS fact 
+'
+print @cube_over_view_sql
+exec(@cube_over_view_sql)
 end
 go
