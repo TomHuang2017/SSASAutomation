@@ -20,3 +20,4 @@ E:\git_project\SSASAutomation\SSASAutomation\SSASAutomation\obj\Debug\SSASAutoma
 E:\git_project\SSASAutomation\SSASAutomation\SSASAutomation\obj\Debug\SSASAutomation.Form1.resources
 E:\git_project\SSASAutomation\SSASAutomation\SSASAutomation\obj\Debug\SSASAutomation.Properties.Resources.resources
 E:\git_project\SSASAutomation\SSASAutomation\SSASAutomation\obj\Debug\SSASAutomation.csproj.GenerateResource.Cache
+E:\git_project\SSASAutomation\SSASAutomation\SSASAutomation\bin\Debug\MDXParser.dll

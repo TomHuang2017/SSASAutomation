@@ -46,6 +46,7 @@ namespace SSASAutomation
                 IDbConnection a = new System.Data.OleDb.OleDbConnection();
                 cubeCreator.CREATE_CUBE_COMMON(sqlHelper, oledb_connection, asMeta, cubeServer, cubeDBName, cubeName, 0);
                 cubeServer.Disconnect();
+
             }
             catch (Exception ex)
             {
@@ -55,7 +56,21 @@ namespace SSASAutomation
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.Bt_BuildCube_Click(this.Bt_BuildCube, e);
+            //this.Bt_BuildCube_Click(this.Bt_BuildCube, e);
+            TestCube();
+        }
+
+        public void TestCube()
+        { 
+            
+            String mdx="Calculate; Create Member CurrentCube.[Measures].[Total Sales] [Measures].[Dollars] * [Measures].[Units];";
+
+            bool i = false;
+            i = AS_API_HELPER.checkMDXSyntax(mdx);
+            if (i)
+            {
+                MessageBox.Show("Succeed");
+            }
         }
     }
 }

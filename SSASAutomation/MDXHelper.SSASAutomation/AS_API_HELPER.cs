@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AnalysisServices;
 using System.Data;
+using MDXParser;
 
 namespace MDXHelper.SSASAutomation
 {
@@ -218,5 +219,97 @@ namespace MDXHelper.SSASAutomation
         }
         #endregion
 
+        #region Check MDX Syntax is validate
+        /// <summary>
+        /// Check MDX Syntax is validate
+        /// </summary>
+        /// <param name="mdxText"></param>
+        /// <returns></returns>
+        public static bool checkMDXSyntax(String mdxText)
+        {
+            bool return_value = false;
+            int IsParseSuccessfully = 0;
+            MDXParser.MDXParser parser = Parse(null, false, false, false, mdxText, out IsParseSuccessfully);
+            if (parser != null && IsParseSuccessfully == 1)
+            {
+                return_value = true;
+            }
+            return return_value;
+        }
+        #endregion
+
+        #region Parse MDX Syntax
+        /// <summary>
+        /// Parse MDX Syntax
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="FillTree"></param>
+        /// <param name="IsExpression"></param>
+        /// <param name="TryAnother"></param>
+        /// <param name="mdx"></param>
+        /// <param name="IsParseSuccessfully"></param>
+        /// <returns></returns>
+        public static MDXParser.MDXParser Parse(string text, bool FillTree, bool IsExpression, bool TryAnother, String mdx, out int IsParseSuccessfully)
+        {
+            IsParseSuccessfully = 1;
+            Locator l = new Locator();
+
+            MDXParser.CubeInfo cb = null;
+            if (cb == null)
+            {
+                cb = new MDXParser.CubeInfo();
+            }
+            //TextBoxSource src = new TextBoxSource(currentMdxEditor, l);
+            Source src = new Source();
+            MDXParser.MDXParser parser = new MDXParser.MDXParser(mdx, src, cb);
+
+            try
+            {
+                if (IsExpression)
+                {
+                    parser.ParseExpression();
+                }
+                else
+                {
+                    parser.Parse(false);
+                }
+            }
+            catch (MDXParserException exception)
+            {
+                IsParseSuccessfully = 0;
+                if (TryAnother)
+                {
+                    try
+                    {
+                        IsParseSuccessfully = 1;
+                        if (IsExpression)
+                        {
+                            parser.Parse();
+                        }
+                        else
+                        {
+                            parser.ParseExpression();
+                        }
+                        goto Label_016E;
+                    }
+                    catch (Exception)
+                    {
+                        //this.m_MessagesGrid.Populate(exception.Messages);
+                        IsParseSuccessfully = 0;
+                        return parser;
+                    }
+                }
+            }
+            finally
+            {
+            }
+        Label_016E:
+            if (FillTree)
+            {
+                MDXNode node = parser.GetNode();
+            }
+            return parser;
+        }
+        #endregion
     }
 }
