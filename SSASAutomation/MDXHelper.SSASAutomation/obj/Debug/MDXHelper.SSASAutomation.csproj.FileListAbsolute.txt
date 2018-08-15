@@ -8,3 +8,4 @@ E:\git_project\SSASAutomation\SSASAutomation\MDXHelper.SSASAutomation\bin\Debug\
 E:\git_project\SSASAutomation\SSASAutomation\MDXHelper.SSASAutomation\obj\Debug\MDXHelper.SSASAutomation.dll
 E:\git_project\SSASAutomation\SSASAutomation\MDXHelper.SSASAutomation\obj\Debug\MDXHelper.SSASAutomation.pdb
 E:\git_project\SSASAutomation\SSASAutomation\MDXHelper.SSASAutomation\bin\Debug\MDXParser.dll
+E:\git_project\SSASAutomation\SSASAutomation\MDXHelper.SSASAutomation\obj\Debug\MDXHelper.SSASAutomation.csprojResolveAssemblyReference.cache
