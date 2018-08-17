@@ -42,6 +42,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>App_Data\MDXHelper.SSASAutomation.dll</HintPath>
     </Reference>
+    <Reference Include="MDXParser">
+      <HintPath>..\..\..\git_project\SSASAutomation\SSASAutomation\MDXHelper.SSASAutomation\bin\Debug\AMOAPI\MDXParser.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AnalysisServices, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\2.自己文档\BigData\SSASAutomation\SSASAutomation\MDXHelper.SSASAutomation\bin\Debug\AMOAPI\Microsoft.AnalysisServices.DLL</HintPath>
@@ -51,6 +54,9 @@
       <HintPath>..\..\..\2.自己文档\BigData\SSASAutomation\SSASAutomation\MDXHelper.SSASAutomation\bin\Debug\AMOAPI\Microsoft.AnalysisServices.AdomdClient.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="SSVParseLib">
+      <HintPath>..\..\..\git_project\SSASAutomation\SSASAutomation\SSASAutomation\bin\Debug\SSVParseLib.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -87,7 +93,9 @@
     <Content Include="App_Data\MDXHelper.SSASAutomation.dll" />
     <Content Include="App_Data\SSASConfiguration\BaseCubeXMLA.xml" />
     <Content Include="App_Data\SSASConfiguration\CubeProcess.xml" />
-    <Content Include="App_Data\SSASConfiguration\Setting.xml" />
+    <Content Include="App_Data\SSASConfiguration\Setting.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Global.asax" />
     <Content Include="SSASBuildCube.html" />
     <Content Include="Web.config" />
@@ -95,10 +103,17 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BuildSSASCubeController.cs" />
+    <Compile Include="Controllers\BuildSSASCubeWithConfigurationController.cs" />
+    <Compile Include="Controllers\CheckMDXSyntaxController.cs" />
+    <Compile Include="Controllers\UpdateCubeMDXWithConfigurationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BuildSSASCube.cs" />
+    <Compile Include="Models\BuildSSASCubeWithConfiguration.cs" />
+    <Compile Include="Models\CheckMDXSyntax.cs" />
+    <Compile Include="Models\MessageStatus.cs" />
+    <Compile Include="Models\UpdateMDXCalculation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

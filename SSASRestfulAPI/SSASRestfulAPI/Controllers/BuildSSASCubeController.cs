@@ -13,19 +13,27 @@ namespace SSASRestfulAPI.Controllers
 {
     public class BuildSSASCubeController : ApiController
     {
-        BuildSSASCube[] buildCube = new BuildSSASCube[] 
+        MessageStatus[] buildCube = new MessageStatus[] 
         { 
-            new BuildSSASCube { BuildSSASCubeMessage = "succeed to build ssas cube.",Status=1}
+            new MessageStatus { Message = "succeed to build ssas cube.",Status=1}
         };
+
         //GET:  /api/BuildSSASCube
-        public IEnumerable<BuildSSASCube> GetBuildSSASCube()
+        public IEnumerable<MessageStatus> BuildSSASCube()
         {
             try
             {
                 String SSASConfigurationPath = AppDomain.CurrentDomain.BaseDirectory + @"App_Data";
-
                 CONFIGURATION_HELPER.BASIC_CONFIGURATION_FOLDER = SSASConfigurationPath;// @"E:\2.自己文档\BigData\SSASAutomation\SSASAutomation\MDXHelper.SSASAutomation";
+                
                 String sqlConnectionString = CONFIGURATION_HELPER.GET_METADATA_PROPERTY("dw_connection_string");// @"Data Source=.\SQL2012;Initial Catalog=CLB_Hospital_DW;Integrated Security=SSPI";
+                String cube_server_name = CONFIGURATION_HELPER.GET_METADATA_PROPERTY("clr.olap.server");// @".\SQL2012";
+                String cubeDBName = CONFIGURATION_HELPER.GET_METADATA_PROPERTY("clr.olap.cubedb");
+                String cubeName = CONFIGURATION_HELPER.GET_METADATA_PROPERTY("clr.olap.cube");
+                String dwServer = CONFIGURATION_HELPER.GET_METADATA_PROPERTY("clr.db.server");
+                String dwDB = CONFIGURATION_HELPER.GET_METADATA_PROPERTY("clr.db.dw");
+
+
                 DB_SQLHELPER_SQLServer sqlHelper = new DB_SQLHELPER_SQLServer(sqlConnectionString);
                 AS_METADATA_SQLServer asMeta = new AS_METADATA_SQLServer();
 
@@ -33,11 +41,8 @@ namespace SSASRestfulAPI.Controllers
 
                 String oleDBConnectionString = sqlConnectionString;
                 IDbConnection oledb_connection = sqlHelper.GET_OLEDB_CONNECTION(oleDBConnectionString);
-                String cube_server_name = CONFIGURATION_HELPER.GET_METADATA_PROPERTY("clr.olap.server");// @".\SQL2012";
-                String cubeDBName = CONFIGURATION_HELPER.GET_METADATA_PROPERTY("clr.olap.cubedb");
-                String cubeName = CONFIGURATION_HELPER.GET_METADATA_PROPERTY("clr.olap.cube");
-                String dwServer = CONFIGURATION_HELPER.GET_METADATA_PROPERTY("clr.db.server");
-                String DWConnectionString = @"Provider=SQLNCLI11.1;Data Source=" + dwServer + ";Integrated Security=SSPI;Initial Catalog=" + CONFIGURATION_HELPER.GET_METADATA_PROPERTY("clr.db.dw") ;
+
+                String DWConnectionString = @"Provider=SQLNCLI11.1;Data Source=" + dwServer + ";Integrated Security=SSPI;Initial Catalog=" + dwDB;
                 //@"Provider=SQLNCLI11.1;Data Source=.\SQL2012;Integrated Security=SSPI;Initial Catalog=CLB_Hospital_DW";
                 Server cubeServer = AS_API_HELPER.CREATE_OLAP_CONNECTION(cube_server_name, null);
                 AS_API_CUBE_CREATOR cubeCreator = new AS_API_CUBE_CREATOR();
@@ -51,10 +56,10 @@ namespace SSASRestfulAPI.Controllers
             }
             catch(Exception ex)
             {
-                buildCube = new BuildSSASCube[] 
-                            { 
-                                new BuildSSASCube { BuildSSASCubeMessage = "failed to build ssas cube, message:"+ex.Message.ToString(),Status=0 }
-                            };
+                buildCube = new MessageStatus[] 
+                { 
+                    new MessageStatus { Message ="failed to build ssas cube, message:"+ex.Message.ToString(),Status=0 }
+                };
             }
             return buildCube;
         }
