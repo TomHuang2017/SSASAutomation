@@ -35,17 +35,24 @@ namespace MDXHelper.SSASAutomation
         {
             return new System.Data.SqlClient.SqlDataAdapter();
         }
-        public override IDbConnection GET_OLEDB_CONNECTION(String _oledbConnectionString)
+
+        public override String GET_OLEDB_CONNECTION_STRING(String _oledbConnectionString)
         {
-            System.Data.OleDb.OleDbConnection oledb=new System.Data.OleDb.OleDbConnection();
+            String returnOledbConnectionString = _oledbConnectionString;
             if (_oledbConnectionString.IndexOf("Provider") <= 1)
             {
-                oledb.ConnectionString = "Provider=SQLNCLI11.1;" + _oledbConnectionString;
+                returnOledbConnectionString = "Provider=SQLNCLI11.1;" + _oledbConnectionString;
             }
             else
             {
-                oledb.ConnectionString = _oledbConnectionString;
+                returnOledbConnectionString = _oledbConnectionString;
             }
+            return returnOledbConnectionString;
+        }
+        public override IDbConnection GET_OLEDB_CONNECTION(String _oledbConnectionString)
+        {
+            System.Data.OleDb.OleDbConnection oledb=new System.Data.OleDb.OleDbConnection();
+            oledb.ConnectionString = GET_OLEDB_CONNECTION_STRING(_oledbConnectionString);
             oledb.Open();
             return  oledb;
         }

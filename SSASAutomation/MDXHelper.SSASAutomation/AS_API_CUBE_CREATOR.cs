@@ -172,6 +172,7 @@ namespace MDXHelper.SSASAutomation
             catch (Exception ex)
             {
                 sqlHelper.ADD_MESSAGE_LOG("[Create cube dsv] " + ex.Message.ToString(), MESSAGE_TYPE.DSV, MESSAGE_RESULT_TYPE.Error);
+
                 throw(ex);
             }
         }
@@ -660,7 +661,7 @@ namespace MDXHelper.SSASAutomation
             }
             catch (Exception ex)
             {
-                sqlHelper.ADD_MESSAGE_LOG(ex.Message.ToString(), MESSAGE_TYPE.MEASURES, MESSAGE_RESULT_TYPE.Error);
+                sqlHelper.ADD_MESSAGE_LOG("Failed to create cube core measures:"+ex.Message.ToString(), MESSAGE_TYPE.MEASURES, MESSAGE_RESULT_TYPE.Error);
                 throw (ex);
             }
         }
@@ -674,7 +675,18 @@ namespace MDXHelper.SSASAutomation
         /// <param name="cube"></param>
         public void REMOVE_CUBE_OBJECTS(DB_SQLHELPER_BASE sqlHelper, Database cubedb, Cube cube)
         {
-            AS_API.REMOVE_MEASURE_GROUPS(sqlHelper,cube, "FactBool");
+            try
+            {
+                AS_API.REMOVE_MEASURE_GROUPS(sqlHelper, cube, "FactBool");
+            }
+            catch (Exception ex)
+            {
+                sqlHelper.ADD_MESSAGE_LOG(
+                    "Failed to refreshed cube mdx calculations:" + ex.Message.ToString(),
+                        MESSAGE_TYPE.REMOVE_CUBE_OBJECT,
+                        MESSAGE_RESULT_TYPE.Error);
+                throw ex;
+            }
         }
         #endregion
 
@@ -727,44 +739,54 @@ namespace MDXHelper.SSASAutomation
         /// <param name="mdx_code"></param>
         public void UPDATE_CUBE_COMMAND(DB_SQLHELPER_BASE sqlHelper, Server cube_server, Database cube_db, Cube cube, String mdx_code)
         {
-            MdxScript mdx = new MdxScript();
-            if (cube.DefaultMdxScript == null)
+            try
             {
-                sqlHelper.ADD_MESSAGE_LOG(
- 
-                    "DefaultMdxScript is none, creating a new one",
-                    MESSAGE_TYPE.MDX,
-                    MESSAGE_RESULT_TYPE.Normal);
+                MdxScript mdx = new MdxScript();
+                if (cube.DefaultMdxScript == null)
+                {
+                    sqlHelper.ADD_MESSAGE_LOG(
+                        "DefaultMdxScript is none, creating a new one",
+                        MESSAGE_TYPE.MDX,
+                        MESSAGE_RESULT_TYPE.Normal);
 
-                mdx.ID = cube.MdxScripts.GetNewID();
-                mdx.Name = "MDXHelper";
-            }
-            else
-            {
-                mdx = cube.DefaultMdxScript;
-            }
-            Command cmd = new Command();
-            if (cube.DefaultMdxScript == null || cube.DefaultMdxScript.Commands == null)
-            {
-                sqlHelper.ADD_MESSAGE_LOG(
+                    mdx.ID = cube.MdxScripts.GetNewID();
+                    mdx.Name = "MDXHelper";
+                }
+                else
+                {
+                    mdx = cube.DefaultMdxScript;
+                }
+                Command cmd = new Command();
+                if (cube.DefaultMdxScript == null || cube.DefaultMdxScript.Commands == null)
+                {
+                    sqlHelper.ADD_MESSAGE_LOG(
 
-                    "DefaultMdxScript.Commands is none, creating a new one",
+                        "DefaultMdxScript.Commands is none, creating a new one",
+                            MESSAGE_TYPE.MDX,
+                            MESSAGE_RESULT_TYPE.Normal);
+                }
+                else
+                {
+                    cmd = cube.DefaultMdxScript.Commands[0];
+                }
+                cmd.Text = mdx_code;
+                mdx.Commands.Remove(cmd);
+                mdx.Commands.Add(cmd);
+                cube.MdxScripts.Remove(mdx);
+                cube.MdxScripts.Add(mdx);
+                sqlHelper.ADD_MESSAGE_LOG(
+                    "Refreshed cube mdx calculations.",
                         MESSAGE_TYPE.MDX,
                         MESSAGE_RESULT_TYPE.Normal);
             }
-            else
+            catch (Exception ex)
             {
-                cmd = cube.DefaultMdxScript.Commands[0];
+                sqlHelper.ADD_MESSAGE_LOG(
+                    "Failed to refreshed cube mdx calculations:"+ex.Message.ToString(),
+                        MESSAGE_TYPE.MDX,
+                        MESSAGE_RESULT_TYPE.Error);
+                throw ex;
             }
-            cmd.Text = mdx_code;
-            mdx.Commands.Remove(cmd);
-            mdx.Commands.Add(cmd);
-            cube.MdxScripts.Remove(mdx);
-            cube.MdxScripts.Add(mdx);
-            sqlHelper.ADD_MESSAGE_LOG(
-                "Refreshed cube mdx calculations.",
-                    MESSAGE_TYPE.MDX,
-                    MESSAGE_RESULT_TYPE.Normal);
         }
         #endregion
     }

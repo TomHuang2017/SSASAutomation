@@ -41,6 +41,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\AMOAPI\Microsoft.AnalysisServices.AdomdClient.dll</HintPath>
     </Reference>
+    <Reference Include="SSVParseLib">
+      <HintPath>..\SSASAutomation\bin\Debug\SSVParseLib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -56,6 +59,7 @@
     <Compile Include="DB_SQLHELPER_SQLServer.cs" />
     <Compile Include="DB_SQLHELPER_Oracle.cs" />
     <Compile Include="AS_API.cs" />
+    <Compile Include="MDXSyntaxInfo.cs" />
     <Compile Include="MESSAGE_RESULT_TYPE.cs" />
     <Compile Include="MESSAGE_TYPE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

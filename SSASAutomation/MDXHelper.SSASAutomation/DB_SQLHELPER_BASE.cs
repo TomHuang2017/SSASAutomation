@@ -57,6 +57,11 @@ namespace MDXHelper.SSASAutomation
             return null;
         }
 
+        public virtual String GET_OLEDB_CONNECTION_STRING(String _oledbConnectionString)
+        {
+            return null;
+        }
+
         public bool IS_OPEN()
         {
             return (this.DBConnection != null && this.DBConnection.State == ConnectionState.Open);

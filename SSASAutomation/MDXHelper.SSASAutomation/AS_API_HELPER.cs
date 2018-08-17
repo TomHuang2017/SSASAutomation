@@ -225,16 +225,28 @@ namespace MDXHelper.SSASAutomation
         /// </summary>
         /// <param name="mdxText"></param>
         /// <returns></returns>
-        public static bool checkMDXSyntax(String mdxText)
+        public static MDXSyntaxInfo checkMDXSyntax(String mdxText)
         {
-            bool return_value = false;
             int IsParseSuccessfully = 0;
+            MDXSyntaxInfo info = new MDXSyntaxInfo();
             MDXParser.MDXParser parser = Parse(null, false, false, false, mdxText, out IsParseSuccessfully);
             if (parser != null && IsParseSuccessfully == 1)
             {
-                return_value = true;
+                info.IsValid = true;
             }
-            return return_value;
+            else
+            {
+                info.IsValid = false;
+                info.SyntaxErrorMDX = mdxText;
+                if(parser!=null)
+                {
+                    info.SyntaxErrorMessage = parser.GetSSParser.m_Errors[0].Text;
+                    info.Length = parser.GetSSParser.m_Errors[0].Location.Length;
+                    info.Column = parser.GetSSParser.m_Errors[0].Location.Column;
+                    info.Line = parser.GetSSParser.m_Errors[0].Location.Line;
+                }
+            }
+            return info;
         }
         #endregion
 

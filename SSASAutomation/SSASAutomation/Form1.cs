@@ -62,11 +62,12 @@ namespace SSASAutomation
         private void Form1_Load(object sender, EventArgs e)
         {
             //this.Bt_BuildCube_Click(this.Bt_BuildCube, e);
-            //TestCube();
+            TestCube();
             CONFIGURATION_HELPER.BASIC_CONFIGURATION_FOLDER = @"E:\2.自己文档\BigData\SSASAutomation\SSASAutomation\MDXHelper.SSASAutomation";
                 
             //UpdateCubeMDX();
-            BuildSSASCubeWithParameters();
+            //BuildSSASCubeWithParameters();
+            //UpdateCubeMDX();
         }
 
         public void TestCube()
@@ -74,9 +75,9 @@ namespace SSASAutomation
             
             String mdx="Calculate; Create Member CurrentCube.[Measures].[Total Sales] [Measures].[Dollars] * [Measures].[Units];";
 
-            bool i = false;
-            i = AS_API_HELPER.checkMDXSyntax(mdx);
-            if (i)
+            MDXSyntaxInfo info = new MDXSyntaxInfo();
+            info = AS_API_HELPER.checkMDXSyntax(mdx);
+            if (info.IsValid)
             {
                 MessageBox.Show("Succeed");
             }
@@ -207,14 +208,14 @@ namespace SSASAutomation
         {
             try
             {
-                clrDWConnectionString = CONFIGURATION_HELPER.GET_METADATA_PROPERTY("dw_connection_string");// @"Data Source=.\SQL2012;Initial Catalog=CLB_Hospital_DW;Integrated Security=SSPI";
+                clrDWConnectionString = @"Data Source=.\SQL2012;Initial Catalog=SSASAutomationDB;Integrated Security=SSPI";
                 clrOlapServer = @".\SQL2012";
                 clrOlapCubeDB = "SSASCubeDB";
                 clrOlapCube = "SSASCube";
                 mdxCaculationScript = @"
 Calculate; 
 Create Member CurrentCube.[Measures].[Total Sales] as 
-[Measures].[门诊人次]  [Measures].[门急诊人次];";
+[Measures].[门诊人次]*2+  [Measures].[门急诊人次];";
 
                 IEnumerator<BuildSSASCube> mdxIE=CheckMDXSyntax(mdxCaculationScript).GetEnumerator();
                 
@@ -222,7 +223,7 @@ Create Member CurrentCube.[Measures].[Total Sales] as
                 {
                     if (mdxIE.Current.Status == 1)
                     {
-                        String sqlConnectionString =  @"Data Source=.\SQL2012;Initial Catalog=CLB_Hospital_DW;Integrated Security=SSPI";
+                        String sqlConnectionString = @"Data Source=.\SQL2012;Initial Catalog=SSASAutomationDB;Integrated Security=SSPI";
                         DB_SQLHELPER_SQLServer sqlHelper = new DB_SQLHELPER_SQLServer(sqlConnectionString);
 
                         String cube_server_name = clrOlapServer;// @".\SQL2012";
@@ -257,7 +258,7 @@ Create Member CurrentCube.[Measures].[Total Sales] as
             try
             {
                 bool isValid = false;
-                isValid = AS_API_HELPER.checkMDXSyntax(mdxCaculationScript);
+                isValid = AS_API_HELPER.checkMDXSyntax(mdxCaculationScript).IsValid;
                 if (isValid)
                 {
                     buildCube = new BuildSSASCube[] 

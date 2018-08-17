@@ -29,6 +29,7 @@ namespace MDXHelper.SSASAutomation
         DIM_USAGE_MANY_TO_MANY,
         CUBE_PROCESS,
         MDX,
-        READ_SYSTEM_FILE
+        READ_SYSTEM_FILE,
+        REMOVE_CUBE_OBJECT
     }
 }
