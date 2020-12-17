@@ -6,65 +6,71 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>E:\VS2013Project\DeployWeb</_PublishTargetUrl>
+    <_PublishTargetUrl>D:\SourceCode\DeployWeb</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="App_Data/MDXHelper.SSASAutomation.dll">
-      <publishTime>08/17/2018 17:59:09</publishTime>
+      <publishTime>12/17/2020 11:15:55</publishTime>
     </File>
     <File Include="App_Data/SSASConfiguration/BaseCubeXMLA.xml">
-      <publishTime>04/12/2018 11:41:39</publishTime>
+      <publishTime>12/17/2020 11:15:55</publishTime>
     </File>
     <File Include="App_Data/SSASConfiguration/CubeProcess.xml">
-      <publishTime>03/21/2018 15:29:03</publishTime>
+      <publishTime>12/17/2020 11:15:55</publishTime>
     </File>
     <File Include="App_Data/SSASConfiguration/Setting.xml">
-      <publishTime>06/13/2018 11:28:15</publishTime>
+      <publishTime>12/17/2020 11:15:55</publishTime>
     </File>
     <File Include="bin/MDXHelper.SSASAutomation.dll">
-      <publishTime>08/17/2018 17:59:09</publishTime>
+      <publishTime>12/17/2020 11:15:55</publishTime>
     </File>
     <File Include="bin/MDXParser.dll">
-      <publishTime>11/23/2015 09:29:20</publishTime>
+      <publishTime>12/17/2020 11:15:55</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AnalysisServices.AdomdClient.dll">
+      <publishTime>12/17/2020 11:15:55</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AnalysisServices.DLL">
+      <publishTime>12/17/2020 11:15:55</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>06/08/2018 16:27:40</publishTime>
+      <publishTime>12/17/2020 11:15:55</publishTime>
     </File>
     <File Include="bin/SSASRestfulAPI.dll">
-      <publishTime>08/17/2018 18:14:25</publishTime>
+      <publishTime>12/17/2020 14:17:44</publishTime>
     </File>
     <File Include="bin/SSVParseLib.dll">
-      <publishTime>10/24/2015 15:57:15</publishTime>
+      <publishTime>12/17/2020 11:15:55</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
-      <publishTime>06/08/2018 16:27:40</publishTime>
+      <publishTime>12/17/2020 11:15:55</publishTime>
     </File>
     <File Include="bin/System.Web.Http.dll">
-      <publishTime>06/08/2018 16:27:40</publishTime>
+      <publishTime>12/17/2020 11:15:55</publishTime>
     </File>
     <File Include="bin/System.Web.Http.WebHost.dll">
-      <publishTime>06/08/2018 16:27:40</publishTime>
+      <publishTime>12/17/2020 11:15:55</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Net.Http.Formatting.resources.dll">
-      <publishTime>06/08/2018 16:27:40</publishTime>
+      <publishTime>12/17/2020 11:15:55</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Web.Http.resources.dll">
-      <publishTime>06/08/2018 16:27:40</publishTime>
+      <publishTime>12/17/2020 11:15:55</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Web.Http.WebHost.resources.dll">
-      <publishTime>06/08/2018 16:27:40</publishTime>
+      <publishTime>12/17/2020 11:15:55</publishTime>
     </File>
     <File Include="Global.asax">
-      <publishTime>06/08/2018 16:27:39</publishTime>
+      <publishTime>12/17/2020 11:15:55</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>06/08/2018 16:27:40</publishTime>
+      <publishTime>12/17/2020 11:15:55</publishTime>
     </File>
     <File Include="SSASBuildCube.html">
-      <publishTime>08/16/2018 15:03:52</publishTime>
+      <publishTime>12/17/2020 11:55:22</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/17/2018 18:13:34</publishTime>
+      <publishTime>12/17/2020 14:17:45</publishTime>
     </File>
   </ItemGroup>
 </Project>

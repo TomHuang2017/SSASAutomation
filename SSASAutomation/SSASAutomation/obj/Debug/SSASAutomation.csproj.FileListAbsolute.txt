@@ -21,3 +21,17 @@ E:\git_project\SSASAutomation\SSASAutomation\SSASAutomation\obj\Debug\SSASAutoma
 E:\git_project\SSASAutomation\SSASAutomation\SSASAutomation\obj\Debug\SSASAutomation.Properties.Resources.resources
 E:\git_project\SSASAutomation\SSASAutomation\SSASAutomation\obj\Debug\SSASAutomation.csproj.GenerateResource.Cache
 E:\git_project\SSASAutomation\SSASAutomation\SSASAutomation\bin\Debug\MDXParser.dll
+D:\SourceCode\SSASAutomation\SSASAutomation\SSASAutomation\SSASAutomation\bin\Debug\SSASAutomation.exe.config
+D:\SourceCode\SSASAutomation\SSASAutomation\SSASAutomation\SSASAutomation\obj\Debug\SSASAutomation.exe
+D:\SourceCode\SSASAutomation\SSASAutomation\SSASAutomation\SSASAutomation\obj\Debug\SSASAutomation.pdb
+D:\SourceCode\SSASAutomation\SSASAutomation\SSASAutomation\SSASAutomation\obj\Debug\SSASAutomation.csprojResolveAssemblyReference.cache
+D:\SourceCode\SSASAutomation\SSASAutomation\SSASAutomation\SSASAutomation\obj\Debug\SSASAutomation.Form1.resources
+D:\SourceCode\SSASAutomation\SSASAutomation\SSASAutomation\SSASAutomation\obj\Debug\SSASAutomation.Properties.Resources.resources
+D:\SourceCode\SSASAutomation\SSASAutomation\SSASAutomation\SSASAutomation\obj\Debug\SSASAutomation.csproj.GenerateResource.Cache
+D:\SourceCode\SSASAutomation\SSASAutomation\SSASAutomation\SSASAutomation\bin\Debug\SSASAutomation.exe
+D:\SourceCode\SSASAutomation\SSASAutomation\SSASAutomation\SSASAutomation\bin\Debug\SSASAutomation.pdb
+D:\SourceCode\SSASAutomation\SSASAutomation\SSASAutomation\SSASAutomation\bin\Debug\MDXHelper.SSASAutomation.dll
+D:\SourceCode\SSASAutomation\SSASAutomation\SSASAutomation\SSASAutomation\bin\Debug\MDXParser.dll
+D:\SourceCode\SSASAutomation\SSASAutomation\SSASAutomation\SSASAutomation\bin\Debug\Microsoft.AnalysisServices.AdomdClient.dll
+D:\SourceCode\SSASAutomation\SSASAutomation\SSASAutomation\SSASAutomation\bin\Debug\Microsoft.AnalysisServices.DLL
+D:\SourceCode\SSASAutomation\SSASAutomation\SSASAutomation\SSASAutomation\bin\Debug\MDXHelper.SSASAutomation.pdb

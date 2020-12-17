@@ -541,7 +541,7 @@ GO
 Create Table ssas_mdx_group
 (
 	id int identity(1,1),
-	mdx_group_name nvarchar(200)，
+	mdx_group_name nvarchar(200),
 	mdx_group_order_index int,--各个组的排序顺序
 	mdx_group_order_index_customized int,--各个组的自定义排序顺序
 	is_default int--是否系统默认的mdx分组
@@ -557,7 +557,7 @@ Create Table ssas_mdx_expression
 	expression nvarchar(max),--表达式
 	expression_type_create0_assign_1_other2 int,--0:新建指标的mdx, 1:重写类型的mdx,2：其他语句
 	expression_type_config0_manul_1 int,--0:根据页面配置生成的mdx, 1：手动整个mdx贴进去的
-	mdx_group_name nvarchar(200)，--mdx 分组
+	mdx_group_name nvarchar(200),--mdx 分组
 	expression_order_index int,--measure的定义顺序
 	expression_order_index_customized int,--measure定制化的定义顺序
 	description nvarchar(512),--指标的需求口径描述

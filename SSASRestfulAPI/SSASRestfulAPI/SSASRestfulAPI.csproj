@@ -45,13 +45,13 @@
     <Reference Include="MDXParser">
       <HintPath>..\..\..\git_project\SSASAutomation\SSASAutomation\MDXHelper.SSASAutomation\bin\Debug\AMOAPI\MDXParser.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AnalysisServices, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.AnalysisServices, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\2.自己文档\BigData\SSASAutomation\SSASAutomation\MDXHelper.SSASAutomation\bin\Debug\AMOAPI\Microsoft.AnalysisServices.DLL</HintPath>
+      <HintPath>..\..\SSASAutomation\MDXHelper.SSASAutomation\bin\Debug\Microsoft.AnalysisServices.DLL</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AnalysisServices.AdomdClient, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.AnalysisServices.AdomdClient, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\2.自己文档\BigData\SSASAutomation\SSASAutomation\MDXHelper.SSASAutomation\bin\Debug\AMOAPI\Microsoft.AnalysisServices.AdomdClient.dll</HintPath>
+      <HintPath>..\..\SSASAutomation\MDXHelper.SSASAutomation\bin\Debug\Microsoft.AnalysisServices.AdomdClient.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="SSVParseLib">

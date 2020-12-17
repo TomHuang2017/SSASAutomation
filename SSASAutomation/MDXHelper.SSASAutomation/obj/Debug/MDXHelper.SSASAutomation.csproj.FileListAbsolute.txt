@@ -9,3 +9,11 @@ E:\git_project\SSASAutomation\SSASAutomation\MDXHelper.SSASAutomation\obj\Debug\
 E:\git_project\SSASAutomation\SSASAutomation\MDXHelper.SSASAutomation\obj\Debug\MDXHelper.SSASAutomation.pdb
 E:\git_project\SSASAutomation\SSASAutomation\MDXHelper.SSASAutomation\bin\Debug\MDXParser.dll
 E:\git_project\SSASAutomation\SSASAutomation\MDXHelper.SSASAutomation\bin\Debug\SSVParseLib.dll
+D:\SourceCode\SSASAutomation\SSASAutomation\SSASAutomation\MDXHelper.SSASAutomation\bin\Debug\MDXHelper.SSASAutomation.dll
+D:\SourceCode\SSASAutomation\SSASAutomation\SSASAutomation\MDXHelper.SSASAutomation\bin\Debug\MDXHelper.SSASAutomation.pdb
+D:\SourceCode\SSASAutomation\SSASAutomation\SSASAutomation\MDXHelper.SSASAutomation\bin\Debug\MDXParser.dll
+D:\SourceCode\SSASAutomation\SSASAutomation\SSASAutomation\MDXHelper.SSASAutomation\bin\Debug\Microsoft.AnalysisServices.AdomdClient.dll
+D:\SourceCode\SSASAutomation\SSASAutomation\SSASAutomation\MDXHelper.SSASAutomation\bin\Debug\Microsoft.AnalysisServices.DLL
+D:\SourceCode\SSASAutomation\SSASAutomation\SSASAutomation\MDXHelper.SSASAutomation\bin\Debug\SSVParseLib.dll
+D:\SourceCode\SSASAutomation\SSASAutomation\SSASAutomation\MDXHelper.SSASAutomation\obj\Debug\MDXHelper.SSASAutomation.dll
+D:\SourceCode\SSASAutomation\SSASAutomation\SSASAutomation\MDXHelper.SSASAutomation\obj\Debug\MDXHelper.SSASAutomation.pdb
